@@ -5,8 +5,8 @@ class CometsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comets
         fields = [
-            'object_name',  
-            'p_yr',         
+            'obj_name',  
+            'p_ir',         
             'moid_au',      
             'w_deg',        
             'ref',

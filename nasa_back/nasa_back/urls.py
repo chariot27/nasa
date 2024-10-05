@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('comets/', CometView.as_view()), 
     path('comets_post/', CometView.as_view()),
+    path('comets_update/',CometView.as_view())
 ]

@@ -15,10 +15,10 @@ def get_commets():
 
     # Definindo os campos de interesse
     fields = [
-        'object_name',  # nome
-        'p_yr',         # orbita solar - quantidade de tempo de orbita solar
-        'moid_au',      # distancia da terra
-        'w_deg',        # distancia do sol
+        'object_name',  
+        'p_yr',         
+        'moid_au',      
+        'w_deg',        
         'ref'
     ]
 
