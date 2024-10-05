@@ -93,5 +93,6 @@ const animate = () => {
 };
 
 animate();
-const COMMETS = getData();
+const COMMETS = await getData();
 createMenu(COMMETS);
+

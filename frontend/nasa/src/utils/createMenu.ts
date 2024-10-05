@@ -1,19 +1,25 @@
 import { Commet } from "../types/commet";
 
 export default function createMenu(commet: Commet[]) {
+
     const menuContainer = document.createElement("div");
     menuContainer.classList.add("menu");
-    
+
     const menuButton = document.createElement("button");
     menuButton.textContent = "☰";
     menuButton.classList.add("menu-button");
     menuContainer.appendChild(menuButton);
-    
+
     const menuOptions = document.createElement("div");
     menuOptions.classList.add("menu-options");
     menuOptions.style.display = "none";
 
-    const options = ["Opção 1", "Opção 2", "Opção 3"];
+    const options: string[] = [];
+
+    for (let i = 0; i < commet.comets.length; i++) {
+        options.push(commet.comets[i].obj_name);
+        console.log(commet.comets[i].obj_name);
+    }
 
     menuButton.addEventListener("click", (event) => {
         event.stopPropagation();
@@ -69,3 +75,4 @@ export default function createMenu(commet: Commet[]) {
         }
     });
 }
+
