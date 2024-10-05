@@ -7,6 +7,7 @@ import Stars from "./objects/stars";
 import Earth, { EarthMesh, LightsMesh, CloudsMesh } from "./objects/earth";
 import show from "./utils/showObject";
 import { Commet } from "./types/Commet";
+import Moon from "./objects/moon";
 
 //global declaration
 let scene;
@@ -57,20 +58,21 @@ bloomComposer.renderToScreen = true;
 bloomComposer.addPass(renderScene);
 bloomComposer.addPass(bloomPass);
 
-// Add sun object to the scene
-//scene.add(sun);
-
 // add objects
 //scene.add(sun);
-//const earth = Earth()
-//scene.add(earth);
-//
+
+// add earth
 let earthMesh = EarthMesh()
 let lightsMesh = LightsMesh()
 let cloudsMesh = CloudsMesh()
 const earth = Earth(earthMesh, lightsMesh, cloudsMesh)
 scene.add(earth)
 
+// add moon
+let moon = Moon()
+moon.position.set(5, 0, 0)
+moon.scale.set(0.272, 0.272, 0.272)
+scene.add(moon)
 // Galaxy geometry
 const starGeometry = new THREE.SphereGeometry(80, 64, 64);
 
