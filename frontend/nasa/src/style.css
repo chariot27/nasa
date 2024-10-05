@@ -8,21 +8,41 @@
 body {
   overflow: hidden;
   position: relative;
-  height: 100vh; /* Garante que o body ocupe toda a altura da viewport */
+  height: 100vh;
+  background-color: black; /* Define o fundo como preto */
 }
 
-.detail-modal {
+#detail-modal {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: white;
-  padding: 10px;
+  background: linear-gradient(45deg, #1a001f, #4b0032, #1e1a4d); /* Gradiente escuro e profundo inspirado no espaço */
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  padding-bottom: 10px;
   gap: 8px;
-  color: white;
-  background-color: rgb(26, 24, 26);
+  color: white; /* Mantém a cor do texto */
+}
+
+.meteor-detail {
+  background-color: rgba(0, 0, 0, 0); /* Fundo totalmente transparente */
+  padding: 10px;
+  height: 300px;
+  min-width: 300px;
+  border-radius: 10px;
+}
+
+.meteor-title {
+  background-color: rgba(0, 0, 0, 0); 
+  border-radius: 10px;
+  padding: 10px;
+  padding-inline: 30px;
+}
+
+.detail-data {
+  padding: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.083);
 }
 
 .menu {
@@ -54,8 +74,8 @@ body {
   flex-direction: column; 
   align-items: flex-start; 
   gap: 8px;
-  height: calc(100vh - 100px); /* Ajuste conforme necessário */
-  overflow: hidden; /* Remova a barra de rolagem padrão */
+  height: calc(100vh - 100px); 
+  overflow: hidden; 
   background-color: rgba(255, 255, 255, 0);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;

@@ -1,6 +1,6 @@
 import { Commet } from "../types/commet";
 import show from "./showObject";
-import cometImageSrc from "../images/cometa.png"; // Importa a imagem
+import cometImageSrc from "../images/image.png"; // Importa a imagem
 
 export default function createMenu(commet: Commet[]) {
     const menuContainer = document.createElement("div");
@@ -9,7 +9,7 @@ export default function createMenu(commet: Commet[]) {
     const menuButton = document.createElement("button");
     const cometImage = document.createElement("img");
 
-    cometImage.src = cometImageSrc; // Utiliza a variável importada
+    cometImage.src = cometImageSrc;
     cometImage.classList.add("comet-icon");
     cometImage.style.width = "30px";
     cometImage.style.height = "30px";
@@ -34,7 +34,6 @@ export default function createMenu(commet: Commet[]) {
     searchBox.style.marginBottom = "5px";
     searchBox.style.width = "100%";
 
-    // Adiciona o campo de pesquisa ao menu
     menuOptions.appendChild(searchBox);
     menuContainer.appendChild(menuOptions); // Mova esta linha para adicionar o menuOptions ao menuContainer
     document.body.appendChild(menuContainer);
@@ -51,14 +50,13 @@ export default function createMenu(commet: Commet[]) {
     commet.comets.forEach((cometItem) => {
         const optionDiv = document.createElement("div");
         optionDiv.classList.add("comet-item");
-
+        optionDiv.addEventListener('click',()=>{
+            show(cometItem)
+        })
         const optionElement = document.createElement("div");
         optionElement.textContent = cometItem.obj_name;
         optionElement.classList.add("menu-option");
 
-        optionElement.addEventListener("click", () => {
-            show(cometItem);
-        });
 
         optionDiv.appendChild(optionElement);
         menuOptions.appendChild(optionDiv);
