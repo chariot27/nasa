@@ -1,11 +1,20 @@
 import { Commet } from "../types/commet";
+import show from "./showObject";
 
 export default function createMenu(commet: Commet[]) {
     const menuContainer = document.createElement("div");
     menuContainer.classList.add("menu");
 
     const menuButton = document.createElement("button");
-    menuButton.textContent = "☰";
+
+    const cometImage = document.createElement("img");
+    cometImage.src = "../images/cometa.png";
+    cometImage.classList.add("comet-icon");
+    
+    cometImage.style.width = "30px"; 
+    cometImage.style.height = "30px"; 
+    
+    menuButton.appendChild(cometImage);
     menuButton.classList.add("menu-button");
     menuContainer.appendChild(menuButton);
 
@@ -13,22 +22,38 @@ export default function createMenu(commet: Commet[]) {
     menuOptions.classList.add("menu-options");
     menuOptions.style.display = "none";
 
+    // Criação do campo de texto para pesquisa
+    const searchBox = document.createElement("input");
+    searchBox.type = "text";
+    searchBox.placeholder = "Pesquisar cometas...";
+    searchBox.classList.add("search-box");
+    
+    searchBox.style.backgroundColor = "rgba(168, 154, 154, 0.5)";
+    searchBox.style.color = "white";
+    searchBox.style.border = "none";
+    searchBox.style.padding = "5px"; 
+    searchBox.style.marginBottom = "5px";
+    searchBox.style.width = "100%"; 
+
+    menuOptions.appendChild(searchBox);
+
     menuButton.addEventListener("click", (event) => {
         event.stopPropagation();
         menuOptions.style.display = menuOptions.style.display === "none" ? "block" : "none";
     });
 
-    let visibleIndex = 0; // Índice do primeiro item visível
-    const visibleItemsCount = 5; // Quantidade de itens visíveis por vez
+    let visibleIndex = 0;
+    const visibleItemsCount = 5;
 
-    const updateMenuVisibility = () => {
-        menuOptions.childNodes.forEach((child, index) => {
+    const updateMenuVisibility = (filter = "") => {
+        const items = Array.from(menuOptions.getElementsByClassName("comet-item"));
+        items.forEach((child, index) => {
             const element = child as HTMLElement;
-            element.style.display = index >= visibleIndex && index < visibleIndex + visibleItemsCount ? 'block' : 'none';
+            const matchesFilter = filter === "" || element.textContent?.toLowerCase().includes(filter.toLowerCase());
+            element.style.display = matchesFilter && index >= visibleIndex && index < visibleIndex + visibleItemsCount ? 'block' : 'none';
         });
     };
 
-    // Adiciona cada cometa à lista de opções
     commet.comets.forEach((cometItem) => {
         const optionDiv = document.createElement("div");
         optionDiv.classList.add("comet-item");
@@ -36,6 +61,10 @@ export default function createMenu(commet: Commet[]) {
         const optionElement = document.createElement("div");
         optionElement.textContent = cometItem.obj_name; 
         optionElement.classList.add("menu-option");
+
+        optionElement.addEventListener("click",()=>{
+            show(cometItem)
+        })
 
         optionDiv.appendChild(optionElement);
         menuOptions.appendChild(optionDiv);
@@ -52,7 +81,13 @@ export default function createMenu(commet: Commet[]) {
         const maxIndex = commet.comets.length - visibleItemsCount;
 
         visibleIndex = Math.min(Math.max(visibleIndex + direction, 0), maxIndex);
-        updateMenuVisibility();
+        updateMenuVisibility(searchBox.value); // Atualiza com o filtro atual
+    });
+
+    // Evento de entrada no campo de pesquisa
+    searchBox.addEventListener("input", () => {
+        visibleIndex = 0; // Reseta o índice visível ao filtrar
+        updateMenuVisibility(searchBox.value); // Atualiza a visibilidade com base no filtro
     });
 
     // Manter o menu visível ao passar o mouse sobre o botão ou as opções
@@ -78,6 +113,8 @@ export default function createMenu(commet: Commet[]) {
         setTimeout(() => {
             if (!menuContainer.matches(':hover')) {
                 menuOptions.style.display = "none"; // Oculta o menu se o mouse não estiver sobre ele
+                searchBox.value = ""; // Limpa o campo de pesquisa
+                updateMenuVisibility(); // Atualiza a visibilidade sem filtro
             }
         }, 100);
     }
