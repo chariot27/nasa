@@ -41,7 +41,7 @@ body {
   border: none;
   font-size: 24px; 
   cursor: pointer; 
-  font-family: 'Orbitron', sans-serif; /* Adicionando a fonte Orbitron aqui */
+  font-family: 'Orbitron', sans-serif;
 }
 
 .menu-options {

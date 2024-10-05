@@ -2,10 +2,7 @@ import * as THREE from "three";
 import { EffectComposer, RenderPass, UnrealBloomPass, OrbitControls } from "three/examples/jsm/Addons.js";
 import sun from "./objects/sun";
 import getData from "./getData";
-<<<<<<< HEAD
 import createMenu from "./utils/createMenu";
-=======
->>>>>>> 18f1bf1153b8b5652dba6140cce7320dc85b4e1b
 
 // Global declarations
 let scene;
