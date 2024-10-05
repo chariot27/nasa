@@ -93,7 +93,7 @@ const animate = () => {
 };
 
 animate();
-getData()
+const COMMETS = getData()
 
 
 

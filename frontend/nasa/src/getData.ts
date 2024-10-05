@@ -1,7 +1,7 @@
 import { Commet } from "./types/commet";
 
 export default async function getData(): Promise<Commet[]> {
-    const url: string = 'http://127.0.0.1:8000/get/';
+    const url: string = 'http://127.0.0.1:8000/comets/';
     
     try {
         const response = await fetch(url);
