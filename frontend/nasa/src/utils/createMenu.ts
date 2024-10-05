@@ -33,14 +33,13 @@ export default function createMenu(commet: Commet[]) {
     commet.comets.forEach((cometItem) => {
         const optionDiv = document.createElement("div");
         optionDiv.classList.add("comet-item");
-
+        optionDiv.addEventListener('click',()=>{
+            show(cometItem)
+        })
         const optionElement = document.createElement("div");
         optionElement.textContent = cometItem.obj_name; 
         optionElement.classList.add("menu-option");
 
-        optionElement.addEventListener("click",()=>{
-            show(cometItem)
-        })
 
         optionDiv.appendChild(optionElement);
         menuOptions.appendChild(optionDiv);
