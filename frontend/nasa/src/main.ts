@@ -75,6 +75,7 @@ let moon = Moon()
 moon.position.set(5, 0, 0)
 moon.scale.set(0.272, 0.272, 0.272)
 scene.add(moon)
+
 // Galaxy geometry
 const starGeometry = new THREE.SphereGeometry(80, 64, 64);
 
