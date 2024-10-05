@@ -1,19 +1,30 @@
 import requests
-import sqlite3
 
-url = 'https://data.nasa.gov/resource/b67r-rgxc.json'
-response = requests.get(url)
-data = response.json()
-comets = [item for item in data]
+def get_commets():
+    url = 'https://data.nasa.gov/resource/b67r-rgxc.json'
+    response = requests.get(url)
+    data = response.json()
 
-conn = sqlite3.connect("\\Users\\maxta\\Documents\\GitHub\\nasa\\db.sqlite3")
-cursor = conn.cursor()
+    # Definindo os campos de interesse
+    fields = [
+        'object_name',  # nome
+        'p_yr',         # orbita solar - quantidade de tempo de orbita solar
+        'moid_au',      # distancia da terra
+        'w_deg',        # distancia do sol
+        'ref'
+    ]
 
-for comet in comets:
-    cursor.execute('''
-        INSERT INTO api_rest_comet (comet_name)
-        VALUES (?)
-    ''', (comet,))
+    commets = []
 
-    conn.commit()
-conn.close()
+    for line in data:
+        commet = {}
+        for field in fields:
+            if field in line:
+                commet[field] = line[field]
+        commets.append(commet)
+
+    print(commets)
+
+if __name__ == '__main__':
+    get_commets()
+        

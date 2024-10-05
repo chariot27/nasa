@@ -3,7 +3,10 @@ import { EffectComposer, RenderPass, UnrealBloomPass, OrbitControls } from "thre
 import sun from "./objects/sun";
 import Stars from "./objects/stars";
 import Earth, { EarthMesh, LightsMesh, CloudsMesh } from "./objects/earth";
+import show from "./utils/showObject";
+import { Commet } from "./types/Commet";
 
+//global declaration
 let scene;
 let camera;
 let renderer;
@@ -112,3 +115,6 @@ const animate = () => {
 };
 
 animate();
+
+
+
