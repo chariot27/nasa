@@ -1,7 +1,9 @@
 import * as THREE from "three"
 import { EffectComposer, RenderPass, UnrealBloomPass, OrbitControls } from "three/examples/jsm/Addons.js";
 import sun from "./objects/sun";
-//global declaration
+import Stars from "./objects/stars";
+import Earth, { EarthMesh, LightsMesh, CloudsMesh } from "./objects/earth";
+
 let scene;
 let camera;
 let renderer;
@@ -42,7 +44,7 @@ const bloomPass = new UnrealBloomPass(
   0.85
 );
 bloomPass.threshold = 0;
-bloomPass.strength = 2; //intensity of glow
+bloomPass.strength = 0.2; //intensity of glow
 bloomPass.radius = 0;
 const bloomComposer = new EffectComposer(renderer);
 bloomComposer.setSize(window.innerWidth, window.innerHeight);
@@ -50,7 +52,17 @@ bloomComposer.renderToScreen = true;
 bloomComposer.addPass(renderScene);
 bloomComposer.addPass(bloomPass);
 
-scene.add(sun);
+
+// add objects
+//scene.add(sun);
+//const earth = Earth()
+//scene.add(earth);
+//
+let earthMesh = EarthMesh()
+let lightsMesh = LightsMesh()
+let cloudsMesh = CloudsMesh()
+const earth = Earth(earthMesh, lightsMesh, cloudsMesh)
+scene.add(earth)
 
 // galaxy geometry
 const starGeometry = new THREE.SphereGeometry(80, 64, 64);
@@ -58,7 +70,7 @@ const starGeometry = new THREE.SphereGeometry(80, 64, 64);
 // galaxy material
 const textureLoader = new THREE.TextureLoader();
 const starMaterial = new THREE.MeshBasicMaterial({
-  map: textureLoader.load("/public/galaxy1.png"),
+  map: textureLoader.load("/textures/galaxy1.png"),
   side: THREE.BackSide,
   transparent: true,
 });
@@ -71,6 +83,11 @@ scene.add(starMesh);
 //ambient light
 const ambientlight = new THREE.AmbientLight(0xffffff, 0.1);
 scene.add(ambientlight);
+
+const sunLight = new THREE.DirectionalLight(0xffffff, 2.0);
+sunLight.position.set(-2, 0.5, 1.5);
+sunLight.layers.set(1)
+scene.add(sunLight);
 
 //resize listener
 window.addEventListener("resize", () => {
@@ -85,6 +102,10 @@ window.addEventListener("resize", () => {
 //animation loop
 const animate = () => {
   requestAnimationFrame(animate);
+
+  earthMesh.rotation.y += 0.002;
+  lightsMesh.rotation.y += 0.002;
+  cloudsMesh.rotation.y += 0.0023;
   starMesh.rotation.y += 0.001;
   camera.layers.set(1);
   bloomComposer.render();
