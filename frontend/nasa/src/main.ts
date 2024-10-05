@@ -10,6 +10,7 @@ import { Commet } from "./types/Commet";
 import Moon from "./objects/moon";
 import Mercury from "./objects/mercury";
 import Jupiter from "./objects/jupiter";
+import Neptune from "./objects/neptune";
 
 // Global declaration
 let scene;
@@ -63,7 +64,8 @@ bloomComposer.addPass(renderScene);
 bloomComposer.addPass(bloomPass);
 
 // add objects
-//scene.add(sun);
+sun.position.set(-10, 0, 0)
+scene.add(sun);
 
 // add earth
 let earthMesh = EarthMesh()
@@ -85,6 +87,13 @@ scene.add(mercury)
 let jupiter = Jupiter()
 jupiter.position.set(19, 0, 0)
 scene.add(jupiter)
+
+let neptune = Neptune()
+neptune.position.set(23, 0, 0)
+scene.add(neptune)
+
+
+
 
 
 // Galaxy geometry
