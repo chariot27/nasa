@@ -3,7 +3,6 @@ import { EffectComposer, RenderPass, UnrealBloomPass, OrbitControls } from "thre
 import sun from "./objects/sun";
 import getData from "./getData";
 import createMenu from "./utils/createMenu";
-
 // Global declarations
 let scene;
 let camera;
@@ -95,4 +94,5 @@ const animate = () => {
 animate();
 const COMMETS = await getData();
 createMenu(COMMETS);
+
 
