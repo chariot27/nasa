@@ -86,22 +86,18 @@ const starMaterial = new THREE.MeshBasicMaterial({
   transparent: true,
 });
 
-// Galaxy mesh
 const starMesh = new THREE.Mesh(starGeometry, starMaterial);
 starMesh.layers.set(1);
 scene.add(starMesh);
 
-// Ambient light
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
 scene.add(ambientLight);
 
-// Sun light
 const sunLight = new THREE.DirectionalLight(0xffffff, 2.0);
 sunLight.position.set(-2, 0.5, 1.5);
 sunLight.layers.set(1);
 scene.add(sunLight);
 
-// Resize listener
 window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
