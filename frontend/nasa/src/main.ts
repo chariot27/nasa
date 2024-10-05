@@ -93,8 +93,5 @@ const animate = () => {
 };
 
 animate();
-const COMMETS = getData()
-
-// Get commets data and create the menu
 const COMMETS = getData();
 createMenu(COMMETS);
