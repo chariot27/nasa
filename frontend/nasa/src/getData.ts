@@ -10,7 +10,7 @@ export default async function getData(): Promise<Commet[]> {
         }
         
         const data: any = await response.json();
-        return data.comets; 
+        return data; 
     } catch (error) {
         console.error('Error fetching data:', error);
         return []; 
