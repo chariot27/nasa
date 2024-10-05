@@ -9,8 +9,8 @@ export default async function getData(): Promise<Commet[]> {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        const data: Commet[] = await response.json();
-        return data; 
+        const data: any = await response.json();
+        return data.comets; 
     } catch (error) {
         console.error('Error fetching data:', error);
         return []; 

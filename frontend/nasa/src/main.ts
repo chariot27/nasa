@@ -2,6 +2,7 @@ import * as THREE from "three"
 import { EffectComposer, RenderPass, UnrealBloomPass, OrbitControls } from "three/examples/jsm/Addons.js";
 import sun from "./objects/sun";
 import getData from "./getData";
+import postData from "./postData";
 
 //global declaration
 let scene;
@@ -94,6 +95,7 @@ const animate = () => {
 
 animate();
 const COMMETS = getData()
+
 
 
 
