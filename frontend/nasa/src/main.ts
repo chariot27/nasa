@@ -100,7 +100,6 @@ window.addEventListener("resize", () => {
   bloomComposer.setSize(window.innerWidth, window.innerHeight);
 }, false);
 
-// Animation loop
 const animate = () => {
   requestAnimationFrame(animate);
 
@@ -112,7 +111,6 @@ const animate = () => {
   bloomComposer.render();
 };
 
-// Fetch comets data and create menu
 (async () => {
   const COMMETS = await getData();
   createMenu(COMMETS);
