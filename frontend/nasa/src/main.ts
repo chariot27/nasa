@@ -123,7 +123,11 @@ const animate = () => {
 
 // Fetch comets data and create menu
 (async () => {
-  const COMMETS = await getData();
-  createMenu(COMMETS);
+  const COMMETS = await getData()
+  if (COMMETS.length == 0) {
+    console.log("nao foi encontrado nenhum cometa")
+  } else {
+    createMenu(COMMETS);
+  }
   animate();
 })();
