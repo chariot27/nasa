@@ -28,3 +28,11 @@ class CometView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except Comets.DoesNotExist:
             return Response({'error': 'Comet not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    def delete(self, request):
+        try:
+            comet = Comets.objects.get(obj_name=request.data['obj_name'])
+            comet.delete()
+            return Response({'status': 'success', 'message': 'Comet deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+        except Comets.DoesNotExist:
+            return Response({'error': 'Comet not found'}, status=status.HTTP_404_NOT_FOUND)
