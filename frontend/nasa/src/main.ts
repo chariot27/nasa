@@ -1,8 +1,7 @@
 import * as THREE from "three"
 import { EffectComposer, RenderPass, UnrealBloomPass, OrbitControls } from "three/examples/jsm/Addons.js";
 import sun from "./objects/sun";
-import show from "./utils/showObject";
-import { Commet } from "./types/commet";
+
 //global declaration
 let scene;
 let camera;
