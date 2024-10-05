@@ -7,3 +7,6 @@ class Comets(models.Model):
     moid_au=models.FloatField()
     w_deg=models.FloatField()
     ref = models.CharField(max_length=100)
+
+    def __str__(self) -> str:
+        return f'{self.obj_name}'

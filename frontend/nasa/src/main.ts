@@ -9,11 +9,13 @@ import show from "./utils/showObject";
 import { Commet } from "./types/Commet";
 import Moon from "./objects/moon";
 
-//global declaration
+// Global declaration
 let scene;
 let camera;
 let renderer;
 const canvas = document.getElementsByTagName("canvas")[0];
+
+// Scene setup
 scene = new THREE.Scene();
 const fov = 60;
 const aspect = window.innerWidth / window.innerHeight;
@@ -50,7 +52,7 @@ const bloomPass = new UnrealBloomPass(
   0.85
 );
 bloomPass.threshold = 0;
-bloomPass.strength = 0.2; //intensity of glow
+bloomPass.strength = 0.2; // Intensity of glow
 bloomPass.radius = 0;
 const bloomComposer = new EffectComposer(renderer);
 bloomComposer.setSize(window.innerWidth, window.innerHeight);
@@ -90,16 +92,16 @@ starMesh.layers.set(1);
 scene.add(starMesh);
 
 // Ambient light
-const ambientlight = new THREE.AmbientLight(0xffffff, 0.1);
-scene.add(ambientlight);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
+scene.add(ambientLight);
 
-// sun light
+// Sun light
 const sunLight = new THREE.DirectionalLight(0xffffff, 2.0);
 sunLight.position.set(-2, 0.5, 1.5);
-sunLight.layers.set(1)
+sunLight.layers.set(1);
 scene.add(sunLight);
 
-//resize listener
+// Resize listener
 window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
@@ -119,8 +121,9 @@ const animate = () => {
   bloomComposer.render();
 };
 
-animate();
-const COMMETS = await getData();
-createMenu(COMMETS);
-
-
+// Fetch comets data and create menu
+(async () => {
+  const COMMETS = await getData();
+  createMenu(COMMETS);
+  animate();
+})();
