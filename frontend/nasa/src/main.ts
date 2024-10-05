@@ -3,7 +3,12 @@ import { EffectComposer, RenderPass, UnrealBloomPass, OrbitControls } from "thre
 import sun from "./objects/sun";
 import getData from "./getData";
 import createMenu from "./utils/createMenu";
-// Global declarations
+import Stars from "./objects/stars";
+import Earth, { EarthMesh, LightsMesh, CloudsMesh } from "./objects/earth";
+import show from "./utils/showObject";
+import { Commet } from "./types/Commet";
+
+//global declaration
 let scene;
 let camera;
 let renderer;
@@ -44,7 +49,7 @@ const bloomPass = new UnrealBloomPass(
   0.85
 );
 bloomPass.threshold = 0;
-bloomPass.strength = 2; // Intensity of glow
+bloomPass.strength = 0.2; //intensity of glow
 bloomPass.radius = 0;
 const bloomComposer = new EffectComposer(renderer);
 bloomComposer.setSize(window.innerWidth, window.innerHeight);
@@ -53,7 +58,18 @@ bloomComposer.addPass(renderScene);
 bloomComposer.addPass(bloomPass);
 
 // Add sun object to the scene
-scene.add(sun);
+//scene.add(sun);
+
+// add objects
+//scene.add(sun);
+//const earth = Earth()
+//scene.add(earth);
+//
+let earthMesh = EarthMesh()
+let lightsMesh = LightsMesh()
+let cloudsMesh = CloudsMesh()
+const earth = Earth(earthMesh, lightsMesh, cloudsMesh)
+scene.add(earth)
 
 // Galaxy geometry
 const starGeometry = new THREE.SphereGeometry(80, 64, 64);
@@ -61,7 +77,7 @@ const starGeometry = new THREE.SphereGeometry(80, 64, 64);
 // Galaxy material
 const textureLoader = new THREE.TextureLoader();
 const starMaterial = new THREE.MeshBasicMaterial({
-  map: textureLoader.load("/public/galaxy1.png"),
+  map: textureLoader.load("/textures/galaxy1.png"),
   side: THREE.BackSide,
   transparent: true,
 });
@@ -75,7 +91,13 @@ scene.add(starMesh);
 const ambientlight = new THREE.AmbientLight(0xffffff, 0.1);
 scene.add(ambientlight);
 
-// Resize listener
+// sun light
+const sunLight = new THREE.DirectionalLight(0xffffff, 2.0);
+sunLight.position.set(-2, 0.5, 1.5);
+sunLight.layers.set(1)
+scene.add(sunLight);
+
+//resize listener
 window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
@@ -86,6 +108,10 @@ window.addEventListener("resize", () => {
 // Animation loop
 const animate = () => {
   requestAnimationFrame(animate);
+
+  earthMesh.rotation.y += 0.002;
+  lightsMesh.rotation.y += 0.002;
+  cloudsMesh.rotation.y += 0.0023;
   starMesh.rotation.y += 0.001;
   camera.layers.set(1);
   bloomComposer.render();
