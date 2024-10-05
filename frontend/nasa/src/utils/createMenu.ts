@@ -1,7 +1,6 @@
 import { Commet } from "../types/commet";
 
 export default function createMenu(commet: Commet[]) {
-
     const menuContainer = document.createElement("div");
     menuContainer.classList.add("menu");
 
@@ -14,31 +13,58 @@ export default function createMenu(commet: Commet[]) {
     menuOptions.classList.add("menu-options");
     menuOptions.style.display = "none";
 
-    const options: string[] = [];
-
-    for (let i = 0; i < commet.comets.length; i++) {
-        options.push(commet.comets[i].obj_name);
-        console.log(commet.comets[i].obj_name);
-    }
-
     menuButton.addEventListener("click", (event) => {
         event.stopPropagation();
         menuOptions.style.display = menuOptions.style.display === "none" ? "block" : "none";
-        alert("sucesso");
+    });
+
+    let visibleIndex = 0; // Índice do primeiro item visível
+    const visibleItemsCount = 5; // Quantidade de itens visíveis por vez
+
+    const updateMenuVisibility = () => {
+        menuOptions.childNodes.forEach((child, index) => {
+            const element = child as HTMLElement;
+            element.style.display = index >= visibleIndex && index < visibleIndex + visibleItemsCount ? 'block' : 'none';
+        });
+    };
+
+    // Adiciona cada cometa à lista de opções
+    commet.comets.forEach((cometItem) => {
+        const optionDiv = document.createElement("div");
+        optionDiv.classList.add("comet-item");
+
+        const optionElement = document.createElement("div");
+        optionElement.textContent = cometItem.obj_name; 
+        optionElement.classList.add("menu-option");
+
+        optionDiv.appendChild(optionElement);
+        menuOptions.appendChild(optionDiv);
     });
 
     menuContainer.appendChild(menuOptions);
     document.body.appendChild(menuContainer);
 
+    updateMenuVisibility(); // Atualiza a visibilidade dos primeiros itens ao iniciar
+
+    menuOptions.addEventListener("wheel", (event) => {
+        event.preventDefault();
+        const direction = Math.sign(event.deltaY);
+        const maxIndex = commet.comets.length - visibleItemsCount;
+
+        visibleIndex = Math.min(Math.max(visibleIndex + direction, 0), maxIndex);
+        updateMenuVisibility();
+    });
+
+    // Manter o menu visível ao passar o mouse sobre o botão ou as opções
     menuButton.addEventListener("mouseenter", () => {
         menuOptions.style.display = "block";
-        addOptionsToMenu();
     });
 
     menuOptions.addEventListener("mouseenter", () => {
         menuOptions.style.display = "block";
     });
 
+    // Ocultar o menu quando o mouse sai do botão ou do menu
     menuButton.addEventListener("mouseleave", () => {
         hideOptions();
     });
@@ -47,20 +73,11 @@ export default function createMenu(commet: Commet[]) {
         hideOptions();
     });
 
-    function addOptionsToMenu() {
-        options.forEach(option => {
-            const optionElement = document.createElement("div");
-            optionElement.textContent = option;
-            optionElement.classList.add("menu-option");
-            menuOptions.appendChild(optionElement);
-        });
-    }
-
+    // Função para ocultar opções
     function hideOptions() {
         setTimeout(() => {
             if (!menuContainer.matches(':hover')) {
-                menuOptions.style.display = "none";
-                menuOptions.innerHTML = '';
+                menuOptions.style.display = "none"; // Oculta o menu se o mouse não estiver sobre ele
             }
         }, 100);
     }
@@ -75,4 +92,3 @@ export default function createMenu(commet: Commet[]) {
         }
     });
 }
-

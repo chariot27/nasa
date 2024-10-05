@@ -1,6 +1,6 @@
 * {
-  margin: 0%;
-  padding: 0%;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -27,25 +27,47 @@ body {
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0); /* Fundo transparente */
   padding: 10px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  color: rgb(155, 148, 148);
+  color: rgb(155, 148, 148); /* Cor padrão para o texto no menu */
+  transition: right 0.3s ease; /* Suaviza a transição da posição */
 }
 
 .menu-button {
-  background: none;
+  background: none; /* Mantém o fundo transparente */
   border: none;
   font-size: 24px; 
   cursor: pointer; 
   font-family: 'Orbitron', sans-serif;
+  color: white; /* Define a cor do texto (símbolo ☰) como branco */
+  margin-left: auto; /* Adiciona margem à esquerda para empurrar o botão para a direita */
 }
 
 .menu-options {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  max-height: 300px; /* Aumente a altura máxima para 300px ou mais */
+  overflow-y: auto; /* Adiciona a barra de rolagem quando necessário */
+  background-color: rgba(255, 255, 255, 0); /* Fundo transparente */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Opcional: borda para a área da lista */
+  border-radius: 5px; /* Borda arredondada para melhor visual */
+}
+
+.comet-item {
+  width: 300px; 
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  text-align: center; 
+}
+
+.comet-item:hover {
+  background-color: rgba(168, 154, 154, 0.5);
 }
