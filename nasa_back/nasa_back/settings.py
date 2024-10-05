@@ -58,8 +58,8 @@ MIDDLEWARE = [
 # settings.py
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",  # Adicione este também, se necessário
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",  # Adicione este também, se necessário
 ]
 
 

@@ -9,5 +9,5 @@ class CometsSerializer(serializers.ModelSerializer):
             'p_yr',         
             'moid_au',      
             'w_deg',        
-            'ref'
+            'ref',
         ]

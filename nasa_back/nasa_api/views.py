@@ -9,11 +9,23 @@ class CometView(APIView):
     def get(self, request):
         comets = Comets.objects.all()
         return Response({'comets': comets.values()})
+    
+    
     def post(self, request):
-        serializer = CometsSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=201)
-        return Response(serializer.errors, status=400)
+        obj = request.data
+        obj_name = obj['obj_name']
+        p_ir = obj['p_ir']
+        moid_au = obj['moid_au']
+        w_deg = obj['w_deg']
+        ref = obj['ref']
+        comet = Comets(obj_name,p_ir,moid_au,w_deg,ref)
+        comet.full_clean()
+        comet.save()
+        return Response({
+            'status' : 'succes'
+        })
+
+        
+       
 
 
