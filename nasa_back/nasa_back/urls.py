@@ -20,5 +20,6 @@ from nasa_api.views import CometView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('get/', CometView.as_view()), 
+    path('comets/', CometView.as_view()), 
+    path('comets_post/', CometView.as_view()),
 ]
