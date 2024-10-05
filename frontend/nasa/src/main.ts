@@ -8,10 +8,6 @@ import Earth, { EarthMesh, LightsMesh, CloudsMesh } from "./objects/earth";
 import show from "./utils/showObject";
 import { Commet } from "./types/Commet";
 import Moon from "./objects/moon";
-import Mercury from "./objects/mercury";
-import Jupiter from "./objects/jupiter";
-import Venus from "./objects/venus";
-import Uranus from "./objects/urano";
 
 // Global declaration
 let scene;
@@ -47,6 +43,23 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.screenSpacePanning = false;
 controls.maxDistance = 500;
 
+// Bloom renderer setup
+const renderScene = new RenderPass(scene, camera);
+const bloomPass = new UnrealBloomPass(
+  new THREE.Vector2(window.innerWidth, window.innerHeight),
+  1.5,
+  0.4,
+  0.85
+);
+bloomPass.threshold = 0;
+bloomPass.strength = 0.2; // Intensity of glow
+bloomPass.radius = 0;
+const bloomComposer = new EffectComposer(renderer);
+bloomComposer.setSize(window.innerWidth, window.innerHeight);
+bloomComposer.renderToScreen = true;
+bloomComposer.addPass(renderScene);
+bloomComposer.addPass(bloomPass);
+
 // add objects
 //scene.add(sun);
 
@@ -62,25 +75,6 @@ let moon = Moon()
 moon.position.set(5, 0, 0)
 moon.scale.set(0.272, 0.272, 0.272)
 scene.add(moon)
-
-let  mercury=Mercury()
- mercury.position.set(8, 0, 0)
- //scene.add(mercury)
-
-let jupiter=Jupiter()
- jupiter.position.set(15, 0, 0)
- //scene.add(jupiter)
-
- let venus = Venus()
-venus.position.set(9, 0, 0)
-//scene.add(venus)
-
-let urano = Uranus()
-urano.position.set(14, 0, 0)
-scene.add(urano)
-
-
- 
 // Galaxy geometry
 const starGeometry = new THREE.SphereGeometry(80, 64, 64);
 
@@ -112,6 +106,7 @@ window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
+  bloomComposer.setSize(window.innerWidth, window.innerHeight);
 }, false);
 
 const animate = () => {
@@ -122,6 +117,7 @@ const animate = () => {
   cloudsMesh.rotation.y += 0.0023;
   starMesh.rotation.y += 0.001;
   camera.layers.set(1);
+  bloomComposer.render();
 };
 
 (async () => {
