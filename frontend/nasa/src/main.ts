@@ -8,6 +8,8 @@ import Earth, { EarthMesh, LightsMesh, CloudsMesh } from "./objects/earth";
 import show from "./utils/showObject";
 import { Commet } from "./types/Commet";
 import Moon from "./objects/moon";
+import Mercury from "./objects/mercury";
+import Jupiter from "./objects/jupiter";
 
 // Global declaration
 let scene;
@@ -75,6 +77,16 @@ let moon = Moon()
 moon.position.set(5, 0, 0)
 moon.scale.set(0.272, 0.272, 0.272)
 scene.add(moon)
+
+let mercury = Mercury()
+mercury.position.set(7, 0, 0)
+scene.add(mercury)
+
+let jupiter = Jupiter()
+jupiter.position.set(19, 0, 0)
+scene.add(jupiter)
+
+
 // Galaxy geometry
 const starGeometry = new THREE.SphereGeometry(80, 64, 64);
 
