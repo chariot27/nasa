@@ -1,4 +1,5 @@
 import { Commet } from "../types/commet";
+import show from "./showObject";
 
 export default function createMenu(commet: Commet[]) {
     const menuContainer = document.createElement("div");
@@ -60,6 +61,10 @@ export default function createMenu(commet: Commet[]) {
         const optionElement = document.createElement("div");
         optionElement.textContent = cometItem.obj_name; 
         optionElement.classList.add("menu-option");
+
+        optionElement.addEventListener("click",()=>{
+            show(cometItem)
+        })
 
         optionDiv.appendChild(optionElement);
         menuOptions.appendChild(optionDiv);
