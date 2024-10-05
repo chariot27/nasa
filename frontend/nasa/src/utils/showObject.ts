@@ -15,21 +15,27 @@ function createModal(commet: Commet) {
     
     const commetTitle = document.createElement("h2");
     commetTitle.innerText = commet.obj_name;
-    
+    commetTitle.classList.add("meteor-title")
+
+    const meteor = document.createElement("div")
+    meteor.classList.add("meteor-detail")
+
     const solar_orbit = document.createElement("p");
     solar_orbit.innerText = `Órbita solar em: ${commet.p_ir} anos`;
-    
+    solar_orbit.classList.add("detail-data")
     const earth_distance = document.createElement("p");
     earth_distance.innerText = `Distância da Terra: ${commet.moid_au} U.A`;
-    
+    earth_distance.classList.add("detail-data")
     const sun_distance = document.createElement("p");
     sun_distance.innerText = `Graus: ${commet.w_deg}`;
-    
+    sun_distance.classList.add("detail-data")
     const ref = document.createElement("p");
     ref.innerText = `Ref: ${commet.ref}`;
+    ref.classList.add("detail-data")
     
     // Adiciona os elementos ao modal
     modal.appendChild(commetTitle);
+    modal.appendChild(meteor)
     modal.appendChild(solar_orbit);
     modal.appendChild(earth_distance);
     modal.appendChild(sun_distance);
