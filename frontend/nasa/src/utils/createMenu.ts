@@ -1,5 +1,6 @@
 import { Commet } from "../types/commet";
 import show from "./showObject";
+import cometImageSrc from "../images/cometa.png"; // Importa a imagem
 
 export default function createMenu(commet: Commet[]) {
     const menuContainer = document.createElement("div");
@@ -8,7 +9,7 @@ export default function createMenu(commet: Commet[]) {
     const menuButton = document.createElement("button");
 
     const cometImage = document.createElement("img");
-    cometImage.src = "../images/cometa.png";
+    cometImage.src = cometImageSrc; // Utiliza a variável importada
     cometImage.classList.add("comet-icon");
     
     cometImage.style.width = "30px"; 
@@ -49,22 +50,26 @@ export default function createMenu(commet: Commet[]) {
         const items = Array.from(menuOptions.getElementsByClassName("comet-item"));
         items.forEach((child, index) => {
             const element = child as HTMLElement;
-            const matchesFilter = filter === "" || element.textContent?.toLowerCase().includes(filter.toLowerCase());
-            element.style.display = matchesFilter && index >= visibleIndex && index < visibleIndex + visibleItemsCount ? 'block' : 'none';
+            const matchesFilter = filter === "" || element.textContent?.toUpperCase().includes(filter.toUpperCase());
+            element.style.display = matchesFilter ? 'block' : 'none'; 
+        });
+
+        const visibleItems = items.filter(child => child.style.display === 'block');
+        visibleItems.forEach((child, index) => {
+            child.style.display = index >= visibleIndex && index < visibleIndex + visibleItemsCount ? 'block' : 'none';
         });
     };
 
     commet.comets.forEach((cometItem) => {
         const optionDiv = document.createElement("div");
         optionDiv.classList.add("comet-item");
-
+        optionDiv.addEventListener('click',()=>{
+            show(cometItem)
+        })
         const optionElement = document.createElement("div");
         optionElement.textContent = cometItem.obj_name; 
         optionElement.classList.add("menu-option");
 
-        optionElement.addEventListener("click",()=>{
-            show(cometItem)
-        })
 
         optionDiv.appendChild(optionElement);
         menuOptions.appendChild(optionDiv);
@@ -73,7 +78,7 @@ export default function createMenu(commet: Commet[]) {
     menuContainer.appendChild(menuOptions);
     document.body.appendChild(menuContainer);
 
-    updateMenuVisibility(); // Atualiza a visibilidade dos primeiros itens ao iniciar
+    updateMenuVisibility(); 
 
     menuOptions.addEventListener("wheel", (event) => {
         event.preventDefault();
@@ -81,16 +86,14 @@ export default function createMenu(commet: Commet[]) {
         const maxIndex = commet.comets.length - visibleItemsCount;
 
         visibleIndex = Math.min(Math.max(visibleIndex + direction, 0), maxIndex);
-        updateMenuVisibility(searchBox.value); // Atualiza com o filtro atual
+        updateMenuVisibility(searchBox.value); 
     });
 
-    // Evento de entrada no campo de pesquisa
     searchBox.addEventListener("input", () => {
-        visibleIndex = 0; // Reseta o índice visível ao filtrar
-        updateMenuVisibility(searchBox.value); // Atualiza a visibilidade com base no filtro
+        visibleIndex = 0; 
+        updateMenuVisibility(searchBox.value); 
     });
 
-    // Manter o menu visível ao passar o mouse sobre o botão ou as opções
     menuButton.addEventListener("mouseenter", () => {
         menuOptions.style.display = "block";
     });
@@ -99,7 +102,6 @@ export default function createMenu(commet: Commet[]) {
         menuOptions.style.display = "block";
     });
 
-    // Ocultar o menu quando o mouse sai do botão ou do menu
     menuButton.addEventListener("mouseleave", () => {
         hideOptions();
     });
@@ -108,13 +110,12 @@ export default function createMenu(commet: Commet[]) {
         hideOptions();
     });
 
-    // Função para ocultar opções
     function hideOptions() {
         setTimeout(() => {
             if (!menuContainer.matches(':hover')) {
-                menuOptions.style.display = "none"; // Oculta o menu se o mouse não estiver sobre ele
-                searchBox.value = ""; // Limpa o campo de pesquisa
-                updateMenuVisibility(); // Atualiza a visibilidade sem filtro
+                menuOptions.style.display = "none"; 
+                searchBox.value = ""; 
+                updateMenuVisibility(); 
             }
         }, 100);
     }
