@@ -19,7 +19,7 @@ function createModal(commet: Commet) {
     const earth_distance = document.createElement("p")
     earth_distance.innerText = `Distancia da Terra = ${commet.moid_au} U.A`
     const sun_dinstance = document.createElement("p")
-    sun_dinstance.innerText = `Graus: = ${commet.w_feg}`
+    sun_dinstance.innerText = `Graus: = ${commet.w_deg}`
     const ref = document.createElement("p")
     ref.innerText = `Ref: = ${commet.ref}`
 
