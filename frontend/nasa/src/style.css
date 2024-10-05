@@ -6,4 +6,18 @@
 
 body {
   overflow: hidden;
+  position: relative;
+}
+.detail-modal{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: white;
+  background-color: rgb(26, 24, 26);
 }
