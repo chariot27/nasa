@@ -8,10 +8,20 @@
 body {
   overflow: hidden;
   position: relative;
+<<<<<<< HEAD
   height: 100vh;
   background-color: black; /* Define o fundo como preto */
+=======
+  height: 100vh; /* Garante que o body ocupe toda a altura da viewport */
 }
-
+#arise-logo{
+  position: absolute;
+  width: 50px;
+  bottom: 8px;
+  left: 50%;
+  padding-bottom: 10px;
+>>>>>>> d898690be74efcb2ecb5736a9cfe91d97511c0ee
+}
 #detail-modal {
   position: absolute;
   top: 10px;
@@ -56,8 +66,14 @@ body {
   gap: 8px;
   color: rgb(155, 148, 148); 
   transition: right 0.3s ease; 
+<<<<<<< HEAD
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+=======
+  background-color: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px); /* Adiciona o efeito de desfoque */
+>>>>>>> d898690be74efcb2ecb5736a9cfe91d97511c0ee
 }
+
 
 .menu-button {
   background: none;
@@ -74,8 +90,13 @@ body {
   flex-direction: column; 
   align-items: flex-start; 
   gap: 8px;
+<<<<<<< HEAD
   height: calc(100vh - 100px); 
   overflow: hidden; 
+=======
+  height: calc(100vh - 100px); /* Ajuste conforme necessário */
+  overflow: hidden; /* Remova a barra de rolagem padrão */
+>>>>>>> d898690be74efcb2ecb5736a9cfe91d97511c0ee
   background-color: rgba(255, 255, 255, 0);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
