@@ -57,8 +57,6 @@ controls.screenSpacePanning = false;
 controls.maxDistance = 500;
 controls.enablePan = false
 controls.enableDamping = true;
-controls.minPolarAngle = 0.8;
-controls.maxPolarAngle = 2.4;
 controls.dampingFactor = 0.07;
 controls.rotateSpeed = 0.4;
 
