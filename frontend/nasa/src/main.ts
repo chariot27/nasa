@@ -10,7 +10,7 @@ import { Commet } from "./types/Commet";
 import Moon from "./objects/moon";
 import Mercury from "./objects/mercury";
 import Jupiter from "./objects/jupiter";
-import Neptune from "./objects/neptune";
+import Neptune from "./objects/neptune"; // Adicionado na sua versão
 
 // Global declaration
 let scene;
@@ -55,7 +55,7 @@ const bloomPass = new UnrealBloomPass(
   0.85
 );
 bloomPass.threshold = 0;
-bloomPass.strength = 0.2; // Intensity of glow
+bloomPass.strength = 0.2; // Alterado conforme sua versão
 bloomPass.radius = 0;
 const bloomComposer = new EffectComposer(renderer);
 bloomComposer.setSize(window.innerWidth, window.innerHeight);
@@ -64,37 +64,40 @@ bloomComposer.addPass(renderScene);
 bloomComposer.addPass(bloomPass);
 
 // add objects
-sun.position.set(-10, 0, 0)
+sun.position.set(-15, 0, 0); // Alterado conforme sua versão
+sun.scale.set(13.29, 13.29, 13.29); // Alterado conforme sua versão
 scene.add(sun);
 
 // add earth
-let earthMesh = EarthMesh()
-let lightsMesh = LightsMesh()
-let cloudsMesh = CloudsMesh()
-const earth = Earth(earthMesh, lightsMesh, cloudsMesh)
-scene.add(earth)
+let earthMesh = EarthMesh();
+let lightsMesh = LightsMesh();
+let cloudsMesh = CloudsMesh();
+const earth = Earth(earthMesh, lightsMesh, cloudsMesh);
+scene.add(earth);
 
 // add moon
-let moon = Moon()
-moon.position.set(5, 0, 0)
-moon.scale.set(0.272, 0.272, 0.272)
-scene.add(moon)
+let moon = Moon();
+moon.position.set(5, 0, 0);
+moon.scale.set(0.272, 0.272, 0.272);
+scene.add(moon);
 
-let mercury = Mercury()
-mercury.position.set(7, 0, 0)
-scene.add(mercury)
+// add mercury
+let mercury = Mercury();
+mercury.position.set(7, 0, 0);
+mercury.scale.set(0.382, 0.382, 0.382); // Alterado conforme sua versão
+scene.add(mercury);
 
-let jupiter = Jupiter()
-jupiter.position.set(19, 0, 0)
-scene.add(jupiter)
+// add jupiter
+let jupiter = Jupiter();
+jupiter.position.set(19, 0, 0);
+jupiter.scale.set(10.97, 10.97, 10.97); // Alterado conforme sua versão
+scene.add(jupiter);
 
-let neptune = Neptune()
-neptune.position.set(23, 0, 0)
-scene.add(neptune)
-
-
-
-
+// add neptune
+let neptune = Neptune();
+neptune.position.set(36, 0, 0); // Adicionado na sua versão
+neptune.scale.set(3.86, 3.86, 3.86); // Adicionado na sua versão
+scene.add(neptune);
 
 // Galaxy geometry
 const starGeometry = new THREE.SphereGeometry(80, 64, 64);
@@ -142,9 +145,9 @@ const animate = () => {
 };
 
 (async () => {
-  const COMMETS = await getData()
+  const COMMETS = await getData();
   if (COMMETS.length == 0) {
-    console.log("nao foi encontrado nenhum cometa")
+    console.log("nao foi encontrado nenhum cometa");
   } else {
     createMenu(COMMETS);
   }
