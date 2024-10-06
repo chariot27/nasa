@@ -74,14 +74,15 @@ nav li {
 .hero a {
     background-color: #33333300;
     color: #fff;
-    border: none;
+    border: 1px solid white;
+    text-decoration: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     border: 1x solid white;
 }
 
-.hero button:hover {
+.hero a:hover {
     background-color: #444;
 }
 
@@ -133,6 +134,10 @@ nav li {
 
 #explorar button:hover {
     background-color: #444;
+}
+
+.explore_button{
+    border: 1px solid white;
 }
 
 /* Footer Section */
