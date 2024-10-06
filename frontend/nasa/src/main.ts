@@ -92,6 +92,7 @@ scene.add(mercury)
 let jupiter = Jupiter()
 jupiter.position.set(19, 0, 0)
 scene.add(jupiter)
+
 let neptune = Neptune()
 neptune.position.set(23, 0, 0)
 scene.add(neptune)
