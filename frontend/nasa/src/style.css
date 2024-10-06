@@ -18,7 +18,9 @@ body {
   left: 50%;
   padding-bottom: 10px;
 }
-
+.img-responsive{
+  max-width: 400px;
+}
 #arise-logo{
   position: absolute;
   width: 50px;

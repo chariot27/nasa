@@ -1,5 +1,4 @@
 import { Commet } from "../types/commet";
-import getRandomCoordinate from "./getRandomCoordinate";
 
 export default function show(commet: Commet) {
     const existingModal: HTMLElement | null = document.getElementById('detail-modal');
@@ -7,7 +6,6 @@ export default function show(commet: Commet) {
         // Remove o modal existente do body
         document.body.removeChild(existingModal);
     }
-    console.log("click");
     createModal(commet);
 }
 
@@ -20,7 +18,11 @@ function createModal(commet: Commet) {
     commetTitle.classList.add("meteor-title")
 
     const meteor = document.createElement("div")
+    const img = document.createElement("img")
+    img.classList.add("img-responsive")
+    img.src = `/meteors/image${getRandomNumber()}.png`
     meteor.classList.add("meteor-detail")
+    meteor.appendChild(img)
 
     const solar_orbit = document.createElement("p");
     solar_orbit.innerText = `Solar orbit in: ${commet.p_ir} years`;
@@ -57,4 +59,8 @@ function createModal(commet: Commet) {
     
     // Adiciona o modal ao body
     document.body.appendChild(modal);
+}
+
+function getRandomNumber() {
+    return Math.floor(Math.random() * 9) + 1; 
 }
