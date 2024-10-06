@@ -14,6 +14,10 @@ import getRandomCoordinate from "./utils/getRandomCoordinate";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import Meteor from "./objects/meteor";
 import Neptune from "./objects/neptune";
+import Mars from "./objects/mars";
+import Uranus from "./objects/uranus";
+import Venus from "./objects/venus";
+import Saturn from "./objects/saturn";
 
 // Global declaration
 let scene;
@@ -68,8 +72,8 @@ bloomComposer.addPass(bloomPass);
 
 // add objects
 let sun = Sun()
-sun.position.set(-20, 0, 0); // Alterado conforme sua versão
-sun.scale.set(13.29, 13.29, 13.29); // Alterado conforme sua versão
+sun.position.set(-400, 0, 0); // Alterado conforme sua versão
+sun.scale.set(109.92, 109.92, 109.92); // Alterado conforme sua versão
 scene.add(sun);
 
 // add earth
@@ -81,21 +85,44 @@ scene.add(earth)
 
 // add moon
 let moon = Moon()
-moon.position.set(5, 0, 0)
+moon.position.set(7.5, 0, 0)
 moon.scale.set(0.272, 0.272, 0.272)
 scene.add(moon)
 
 let mercury = Mercury()
-mercury.position.set(7, 0, 0)
+mercury.position.set(-200, 0, 0)
+mercury.scale.set(0.382, 0.382, 0.382)
 scene.add(mercury)
 
 let jupiter = Jupiter()
-jupiter.position.set(19, 0, 0)
+jupiter.position.set(150, 0, 0)
+jupiter.scale.set(10.382, 10.382, 10.382)
 scene.add(jupiter)
 
 let neptune = Neptune()
-neptune.position.set(23, 0, 0)
+neptune.position.set(600, 0, 0)
+neptune.scale.set(3.86, 3.86, 3.86)
 scene.add(neptune)
+
+let mars = Mars()
+mars.position.set(75, 0, 0)
+mars.scale.set(0.533, 0.533, 0.533)
+scene.add(mars)
+
+let uranus = Uranus()
+uranus.position.set(400, 0, 0)
+uranus.scale.set(3.98, 3.98, 3.98)
+scene.add(uranus)
+
+let venus = Venus()
+venus.position.set(-100, 0, 0)
+venus.scale.set(0.949, 0.949, 0.949)
+scene.add(venus)
+
+let saturn = Saturn()
+saturn.position.set(250, 0, 0)
+saturn.scale.set(9.14, 9.14, 9.14)
+scene.add(saturn)
 /*
 const loader = new GLTFLoader().setPath('./models/meteorite/');
 loader.load('scene.gltf', (gltf) => {
