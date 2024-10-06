@@ -11,6 +11,7 @@ import Moon from "./objects/moon";
 import Mercury from "./objects/mercury";
 import Jupiter from "./objects/jupiter";
 
+
 // Global declaration
 let scene;
 let camera;
@@ -85,7 +86,6 @@ scene.add(mercury)
 let jupiter = Jupiter()
 jupiter.position.set(19, 0, 0)
 scene.add(jupiter)
-
 
 // Galaxy geometry
 const starGeometry = new THREE.SphereGeometry(80, 64, 64);

@@ -1,6 +1,6 @@
 import { Commet } from "../types/commet";
 import show from "./showObject";
-import cometImageSrc from "../images/image.png"; // Importa a imagem
+import cometImageSrc from "/icons/arise.png"; 
 
 export default function createMenu(commet: Commet[]) {
     const menuContainer = document.createElement("div");
