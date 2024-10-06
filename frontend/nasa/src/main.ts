@@ -10,6 +10,7 @@ import { Commet } from "./types/Commet";
 import Moon from "./objects/moon";
 import Mercury from "./objects/mercury";
 import Jupiter from "./objects/jupiter";
+import getRandomCoordinate from "./utils/getRandomCoordinate";
 
 
 // Global declaration
@@ -127,13 +128,20 @@ const animate = () => {
   camera.layers.set(1);
   bloomComposer.render();
 };
-
+let COMMETS 
 (async () => {
-  const COMMETS = await getData()
+  COMMETS = await getData()
   if (COMMETS.length == 0) {
     console.log("nao foi encontrado nenhum cometa")
   } else {
     createMenu(COMMETS);
+    for (let i = 0 ; i < COMMETS.comets.length ; i++){
+      const comet_coordinate = getRandomCoordinate(COMMETS.comets[i].moid_au)
+      console.log(comet_coordinate)
+      // TRABALHA AQUI HENRY AAAAAAAAAAAAAAAAAAAAAAAAA
+      //FELIZ ANIVERSARIO
+    }
   }
   animate();
 })();
+

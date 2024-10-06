@@ -1,4 +1,5 @@
 import { Commet } from "../types/commet";
+import getRandomCoordinate from "./getRandomCoordinate";
 
 export default function show(commet: Commet) {
     const existingModal: HTMLElement | null = document.getElementById('detail-modal');
@@ -6,6 +7,7 @@ export default function show(commet: Commet) {
         // Remove o modal existente do body
         document.body.removeChild(existingModal);
     }
+    console.log("click");
     createModal(commet);
 }
 
