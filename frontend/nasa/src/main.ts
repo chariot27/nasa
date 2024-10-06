@@ -10,7 +10,10 @@ import { Commet } from "./types/Commet";
 import Moon from "./objects/moon";
 import Mercury from "./objects/mercury";
 import Jupiter from "./objects/jupiter";
+import getRandomCoordinate from "./utils/getRandomCoordinate";
 import Neptune from "./objects/neptune";
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import Meteor from "./objects/meteor";
 
 // Global declaration
 let scene;
@@ -55,7 +58,7 @@ const bloomPass = new UnrealBloomPass(
   0.85
 );
 bloomPass.threshold = 0;
-bloomPass.strength = 0.2; // Intensity of glow
+bloomPass.strength = 0.1; // Intensity of glow
 bloomPass.radius = 0;
 const bloomComposer = new EffectComposer(renderer);
 bloomComposer.setSize(window.innerWidth, window.innerHeight);
@@ -87,14 +90,22 @@ scene.add(mercury)
 let jupiter = Jupiter()
 jupiter.position.set(19, 0, 0)
 scene.add(jupiter)
-
 let neptune = Neptune()
 neptune.position.set(23, 0, 0)
 scene.add(neptune)
-
-
-
-
+/*
+const loader = new GLTFLoader().setPath('./models/meteorite/');
+loader.load('scene.gltf', (gltf) => {
+  const mesh = gltf.scene;
+  mesh.layers.set(1);
+  console.log(mesh);
+  scene.add(mesh);
+}, (xhr) => {
+  console.log(`loading ${xhr.loaded / xhr.total * 100}%`);
+}, (error) => {
+  console.error(error);
+});
+*/
 
 // Galaxy geometry
 const starGeometry = new THREE.SphereGeometry(80, 64, 64);
@@ -107,22 +118,18 @@ const starMaterial = new THREE.MeshBasicMaterial({
   transparent: true,
 });
 
-// Galaxy mesh
 const starMesh = new THREE.Mesh(starGeometry, starMaterial);
 starMesh.layers.set(1);
 scene.add(starMesh);
 
-// Ambient light
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
 scene.add(ambientLight);
 
-// Sun light
 const sunLight = new THREE.DirectionalLight(0xffffff, 2.0);
 sunLight.position.set(-2, 0.5, 1.5);
 sunLight.layers.set(1);
 scene.add(sunLight);
 
-// Resize listener
 window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
@@ -140,13 +147,27 @@ const animate = () => {
   camera.layers.set(1);
   bloomComposer.render();
 };
-
+let COMMETS
 (async () => {
-  const COMMETS = await getData()
+  COMMETS = await getData()
   if (COMMETS.length == 0) {
     console.log("nao foi encontrado nenhum cometa")
   } else {
     createMenu(COMMETS);
+    for (let i = 0; i < COMMETS.comets.length; i++) {
+      const comet_coordinate = getRandomCoordinate(COMMETS.comets[i].moid_au)
+      console.log(comet_coordinate)
+
+      let meteor = Meteor()
+      meteor.position.set(comet_coordinate.x, comet_coordinate.y, comet_coordinate.z)
+      scene.add(meteor)
+
+
+      // TRABALHA AQUI HENRY AAAAAAAAAAAAAAAAAAAAAAAAA
+      //FELIZ ANIVERSARIO
+    }
   }
   animate();
 })();
+
+

@@ -1,4 +1,5 @@
 import { Commet } from "../types/commet";
+import getRandomCoordinate from "./getRandomCoordinate";
 
 export default function show(commet: Commet) {
     const existingModal: HTMLElement | null = document.getElementById('detail-modal');
@@ -6,6 +7,7 @@ export default function show(commet: Commet) {
         // Remove o modal existente do body
         document.body.removeChild(existingModal);
     }
+    console.log("click");
     createModal(commet);
 }
 
@@ -21,17 +23,28 @@ function createModal(commet: Commet) {
     meteor.classList.add("meteor-detail")
 
     const solar_orbit = document.createElement("p");
-    solar_orbit.innerText = `Órbita solar em: ${commet.p_ir} anos`;
+    solar_orbit.innerText = `Solar orbit in: ${commet.p_ir} years`;
     solar_orbit.classList.add("detail-data")
     const earth_distance = document.createElement("p");
-    earth_distance.innerText = `Distância da Terra: ${commet.moid_au} U.A`;
+    earth_distance.innerText = `Distance from earth: ${commet.moid_au} U.A`;
     earth_distance.classList.add("detail-data")
     const sun_distance = document.createElement("p");
-    sun_distance.innerText = `Graus: ${commet.w_deg}`;
+    sun_distance.innerText = `Degrees: ${commet.w_deg}`;
     sun_distance.classList.add("detail-data")
     const ref = document.createElement("p");
     ref.innerText = `Ref: ${commet.ref}`;
     ref.classList.add("detail-data")
+
+    const close = document.createElement("button")
+    close.innerText = 'Close'
+    close.classList.add("close-button")
+    close.addEventListener("click",()=>{
+        const existingModal: HTMLElement | null = document.getElementById('detail-modal');
+        if (existingModal) {
+            // Remove o modal existente do body
+            document.body.removeChild(existingModal);
+        }
+    })
     
     // Adiciona os elementos ao modal
     modal.appendChild(commetTitle);
@@ -40,6 +53,7 @@ function createModal(commet: Commet) {
     modal.appendChild(earth_distance);
     modal.appendChild(sun_distance);
     modal.appendChild(ref);
+    modal.appendChild(close)
     
     // Adiciona o modal ao body
     document.body.appendChild(modal);
