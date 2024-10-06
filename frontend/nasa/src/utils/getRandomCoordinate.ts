@@ -1,6 +1,6 @@
 export default function getRandomCoordinate(MaxDistance: number) {
     const radius = MaxDistance * 40; // Fator de escala, se necessário
-    const minDistance = 1.3; // Distância mínima
+    const minDistance = 2; // Distância mínima
     const adjustedRadius = Math.max(radius, minDistance);
 
     // Gera coordenadas em um espaço tridimensional
