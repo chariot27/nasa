@@ -2,7 +2,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import * as THREE from "three"
 import { getFresnelMat } from '../utils/getFresnelMat';
 function RandomSize() {
-  const randomNum = Math.random() * (0.10 - 0.05) + 0.05;
+  const randomNum = Math.random() * (0.07 - 0.02) + 0.02;
   return randomNum
 }
 const geometry = new THREE.IcosahedronGeometry(1, 12);
