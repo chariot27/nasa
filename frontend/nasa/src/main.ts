@@ -12,6 +12,8 @@ import Mercury from "./objects/mercury";
 import Jupiter from "./objects/jupiter";
 import getRandomCoordinate from "./utils/getRandomCoordinate";
 
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import Meteor from "./objects/meteor";
 
 // Global declaration
 let scene;
@@ -56,7 +58,7 @@ const bloomPass = new UnrealBloomPass(
   0.85
 );
 bloomPass.threshold = 0;
-bloomPass.strength = 0.2; // Intensity of glow
+bloomPass.strength = 0.1; // Intensity of glow
 bloomPass.radius = 0;
 const bloomComposer = new EffectComposer(renderer);
 bloomComposer.setSize(window.innerWidth, window.innerHeight);
@@ -72,6 +74,7 @@ let earthMesh = EarthMesh()
 let lightsMesh = LightsMesh()
 let cloudsMesh = CloudsMesh()
 const earth = Earth(earthMesh, lightsMesh, cloudsMesh)
+earth.position.set(3, 3, 3)
 scene.add(earth)
 
 // add moon
@@ -87,6 +90,23 @@ scene.add(mercury)
 let jupiter = Jupiter()
 jupiter.position.set(19, 0, 0)
 scene.add(jupiter)
+
+let meteor = Meteor()
+meteor.scale.set(0.1, 0.1, 0.1)
+scene.add(meteor)
+/*
+const loader = new GLTFLoader().setPath('./models/meteorite/');
+loader.load('scene.gltf', (gltf) => {
+  const mesh = gltf.scene;
+  mesh.layers.set(1);
+  console.log(mesh);
+  scene.add(mesh);
+}, (xhr) => {
+  console.log(`loading ${xhr.loaded / xhr.total * 100}%`);
+}, (error) => {
+  console.error(error);
+});
+*/
 
 // Galaxy geometry
 const starGeometry = new THREE.SphereGeometry(80, 64, 64);
@@ -128,14 +148,14 @@ const animate = () => {
   camera.layers.set(1);
   bloomComposer.render();
 };
-let COMMETS 
+let COMMETS
 (async () => {
   COMMETS = await getData()
   if (COMMETS.length == 0) {
     console.log("nao foi encontrado nenhum cometa")
   } else {
     createMenu(COMMETS);
-    for (let i = 0 ; i < COMMETS.comets.length ; i++){
+    for (let i = 0; i < COMMETS.comets.length; i++) {
       const comet_coordinate = getRandomCoordinate(COMMETS.comets[i].moid_au)
       console.log(comet_coordinate)
       // TRABALHA AQUI HENRY AAAAAAAAAAAAAAAAAAAAAAAAA
@@ -144,4 +164,5 @@ let COMMETS
   }
   animate();
 })();
+
 
