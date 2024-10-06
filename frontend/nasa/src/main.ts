@@ -47,11 +47,20 @@ renderer.autoClear = false;
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
 renderer.setClearColor(0x000000, 0.0);
+renderer.outputColorSpace = THREE.SRGBColorSpace
+renderer.toneMapping = THREE.CineonToneMapping
+renderer.toneMappingExposure = 1.5
 
 // Orbit controls
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.screenSpacePanning = false;
 controls.maxDistance = 500;
+controls.enablePan = false
+controls.enableDamping = true;
+controls.minPolarAngle = 0.8;
+controls.maxPolarAngle = 2.4;
+controls.dampingFactor = 0.07;
+controls.rotateSpeed = 0.4;
 
 // Bloom renderer setup
 const renderScene = new RenderPass(scene, camera);
@@ -140,7 +149,7 @@ loader.load('scene.gltf', (gltf) => {
 */
 
 // Galaxy geometry
-const starGeometry = new THREE.SphereGeometry(80, 64, 64);
+const starGeometry = new THREE.SphereGeometry(500, 64, 64);
 
 // Galaxy material
 const textureLoader = new THREE.TextureLoader();
@@ -154,7 +163,7 @@ const starMesh = new THREE.Mesh(starGeometry, starMaterial);
 starMesh.layers.set(1);
 scene.add(starMesh);
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
 scene.add(ambientLight);
 
 const sunLight = new THREE.DirectionalLight(0xffffff, 2.0);
@@ -197,8 +206,6 @@ let COMMETS
       scene.add(meteor)
 
       COMMETS.comets[i].meteor = meteor
-
-
       // TRABALHA AQUI HENRY AAAAAAAAAAAAAAAAAAAAAAAAA
       //FELIZ ANIVERSARIO
     }
