@@ -43,10 +43,26 @@ body {
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); 
 }
 
+.close-button{
+  background-color: rgba(255, 255, 255, 0);
+  border: 1px solid rgba(255, 255, 255, 0.271);
+  border-radius: 5px;
+  padding: 5px;
+  margin-inline:10px;
+  color: white;
+  cursor: pointer;
+  transition: .6s;
+}
+.close-button:hover{
+  background-color: white;
+  color: black;
+  transition: .4s;
+}
+
 .meteor-detail {
   background-color: rgba(0, 0, 0, 0); 
   padding: 10px;
-  height: 300px;
+  height: 250px;
   min-width: 300px;
   border-radius: 10px;
 }

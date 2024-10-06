@@ -24,7 +24,7 @@ export default function createMenu(commet: Commet[]) {
 
     const searchBox = document.createElement("input");
     searchBox.type = "text";
-    searchBox.placeholder = "Pesquisar cometas...";
+    searchBox.placeholder = "Search for comets...";
     searchBox.classList.add("search-box");
 
     searchBox.style.backgroundColor = "rgba(168, 154, 154, 0.5)";
