@@ -31,7 +31,8 @@ body {
   position: absolute;
   top: 10px;
   left: 10px;
-  background: linear-gradient(45deg, #1a001f, #4b0032, #1e1a4d); 
+  background-color: rgba(32, 32, 32, 0.045);
+  backdrop-filter: blur(10px); 
   border-radius: 10px;
   display: flex;
   flex-direction: column;
