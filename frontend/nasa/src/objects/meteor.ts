@@ -1,19 +1,23 @@
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import * as THREE from "three"
+
+function RandomSize() {
+  const randomNum = Math.random() * (0.10 - 0.05) + 0.05;
+  return randomNum
+}
+
 function Meteor() {
 
-  const loader = new THREE.TextureLoader();
   const geometry = new THREE.IcosahedronGeometry(1, 12);
 
-  const moonMat = new THREE.MeshBasicMaterial({
-    map: loader.load("./textures/moonmap2k.jpg"),
+  const meteorMat = new THREE.MeshBasicMaterial({
+    color: 0x808080
   });
-  const moonMesh = new THREE.Mesh(geometry, moonMat);
-  moonMesh.layers.set(1)
-  moonMesh.scale.set(0.1, 0.1, 0.1)
+  const meteorMesh = new THREE.Mesh(geometry, meteorMat);
+  meteorMesh.layers.set(1)
+  meteorMesh.scale.set(RandomSize(), RandomSize(), RandomSize())
 
-  return moonMesh
-
+  return meteorMesh
 }
 
 export default Meteor
