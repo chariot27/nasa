@@ -87,7 +87,9 @@ scene.add(earth)
 let moon = Moon()
 moon.position.set(7.5, 0, 0)
 moon.scale.set(0.272, 0.272, 0.272)
-scene.add(moon)
+let moonOrbitGroup = new THREE.Group();
+scene.add(moonOrbitGroup);
+moonOrbitGroup.add(moon);
 
 let mercury = Mercury()
 mercury.position.set(-200, 0, 0)
@@ -174,6 +176,9 @@ const animate = () => {
   lightsMesh.rotation.y += 0.002;
   cloudsMesh.rotation.y += 0.0023;
   starMesh.rotation.y += 0.001;
+
+  moonOrbitGroup.rotation.y -= 0.0037
+
   camera.layers.set(1);
   bloomComposer.render();
 };
@@ -188,6 +193,7 @@ let COMMETS
 
       let meteor = Meteor()
       meteor.position.set(comet_coordinate.x, comet_coordinate.y, comet_coordinate.z)
+      meteor.scale.set(3, 3, 3)
       scene.add(meteor)
 
       COMMETS.comets[i].meteor = meteor
