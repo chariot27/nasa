@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { EffectComposer, RenderPass, UnrealBloomPass, OrbitControls } from "three/examples/jsm/Addons.js";
-import sun from "./objects/sun";
+import Sun from "./objects/sun";
 import getData from "./getData";
 import createMenu from "./utils/createMenu";
 import Stars from "./objects/stars";
@@ -10,14 +10,11 @@ import { Commet } from "./types/Commet";
 import Moon from "./objects/moon";
 import Mercury from "./objects/mercury";
 import Jupiter from "./objects/jupiter";
-<<<<<<< HEAD
-import Neptune from "./objects/neptune"; // Adicionado na sua versão
-=======
 import getRandomCoordinate from "./utils/getRandomCoordinate";
 import Neptune from "./objects/neptune";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import Meteor from "./objects/meteor";
->>>>>>> main
+
 
 // Global declaration
 let scene;
@@ -62,11 +59,7 @@ const bloomPass = new UnrealBloomPass(
   0.85
 );
 bloomPass.threshold = 0;
-<<<<<<< HEAD
-bloomPass.strength = 0.2; // Alterado conforme sua versão
-=======
 bloomPass.strength = 0.1; // Intensity of glow
->>>>>>> main
 bloomPass.radius = 0;
 const bloomComposer = new EffectComposer(renderer);
 bloomComposer.setSize(window.innerWidth, window.innerHeight);
@@ -75,7 +68,8 @@ bloomComposer.addPass(renderScene);
 bloomComposer.addPass(bloomPass);
 
 // add objects
-sun.position.set(-15, 0, 0); // Alterado conforme sua versão
+let sun = Sun()
+sun.position.set(-20, 0, 0); // Alterado conforme sua versão
 sun.scale.set(13.29, 13.29, 13.29); // Alterado conforme sua versão
 scene.add(sun);
 
@@ -87,7 +81,6 @@ const earth = Earth(earthMesh, lightsMesh, cloudsMesh);
 scene.add(earth);
 
 // add moon
-<<<<<<< HEAD
 let moon = Moon();
 moon.position.set(5, 0, 0);
 moon.scale.set(0.272, 0.272, 0.272);
@@ -110,22 +103,7 @@ let neptune = Neptune();
 neptune.position.set(36, 0, 0); // Adicionado na sua versão
 neptune.scale.set(3.86, 3.86, 3.86); // Adicionado na sua versão
 scene.add(neptune);
-=======
-let moon = Moon()
-moon.position.set(5, 0, 0)
-moon.scale.set(0.272, 0.272, 0.272)
-scene.add(moon)
 
-let mercury = Mercury()
-mercury.position.set(7, 0, 0)
-scene.add(mercury)
-
-let jupiter = Jupiter()
-jupiter.position.set(19, 0, 0)
-scene.add(jupiter)
-let neptune = Neptune()
-neptune.position.set(23, 0, 0)
-scene.add(neptune)
 /*
 const loader = new GLTFLoader().setPath('./models/meteorite/');
 loader.load('scene.gltf', (gltf) => {
@@ -139,7 +117,6 @@ loader.load('scene.gltf', (gltf) => {
   console.error(error);
 });
 */
->>>>>>> main
 
 // Galaxy geometry
 const starGeometry = new THREE.SphereGeometry(80, 64, 64);
@@ -183,11 +160,7 @@ const animate = () => {
 };
 let COMMETS
 (async () => {
-<<<<<<< HEAD
-  const COMMETS = await getData();
-=======
   COMMETS = await getData()
->>>>>>> main
   if (COMMETS.length == 0) {
     console.log("nao foi encontrado nenhum cometa");
   } else {
