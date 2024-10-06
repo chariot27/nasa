@@ -74,7 +74,6 @@ let earthMesh = EarthMesh()
 let lightsMesh = LightsMesh()
 let cloudsMesh = CloudsMesh()
 const earth = Earth(earthMesh, lightsMesh, cloudsMesh)
-earth.position.set(3, 3, 3)
 scene.add(earth)
 
 // add moon
@@ -91,9 +90,6 @@ let jupiter = Jupiter()
 jupiter.position.set(19, 0, 0)
 scene.add(jupiter)
 
-let meteor = Meteor()
-meteor.scale.set(0.1, 0.1, 0.1)
-scene.add(meteor)
 /*
 const loader = new GLTFLoader().setPath('./models/meteorite/');
 loader.load('scene.gltf', (gltf) => {
@@ -158,6 +154,12 @@ let COMMETS
     for (let i = 0; i < COMMETS.comets.length; i++) {
       const comet_coordinate = getRandomCoordinate(COMMETS.comets[i].moid_au)
       console.log(comet_coordinate)
+
+      let meteor = Meteor()
+      meteor.position.set(comet_coordinate.x, comet_coordinate.y, comet_coordinate.z)
+      scene.add(meteor)
+
+
       // TRABALHA AQUI HENRY AAAAAAAAAAAAAAAAAAAAAAAAA
       //FELIZ ANIVERSARIO
     }

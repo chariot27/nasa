@@ -10,6 +10,7 @@ function Meteor() {
   });
   const moonMesh = new THREE.Mesh(geometry, moonMat);
   moonMesh.layers.set(1)
+  moonMesh.scale.set(0.1, 0.1, 0.1)
 
   return moonMesh
 
