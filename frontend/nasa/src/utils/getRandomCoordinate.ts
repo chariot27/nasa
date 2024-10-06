@@ -3,29 +3,23 @@ export default function getRandomCoordinate(MaxDistance: number) {
     const minDistance = 1.3; // Distância mínima
     const adjustedRadius = Math.max(radius, minDistance);
 
-    const value = Math.random() * (adjustedRadius - minDistance) + minDistance; // Distância aleatória ajustada
-    const chosen = getRandomNumber()
+    // Gera coordenadas em um espaço tridimensional
+    const randomUnitVector = () => {
+        const theta = Math.random() * 2 * Math.PI; // Ângulo azimutal
+        const phi = Math.acos(2 * Math.random() - 1); // Ângulo polar
+        const x = adjustedRadius * Math.sin(phi) * Math.cos(theta);
+        const y = adjustedRadius * Math.sin(phi) * Math.sin(theta);
+        const z = adjustedRadius * Math.cos(phi);
 
-    if(chosen == 1){
-        return{
-            x:value,
-            y:0,
-            z:0
-        }
-    }else if(chosen == 2){
-        return{
-            x:0,
-            y:value,
-            z:0
-        }
-    }else{
-        return{
-            x:0,
-            y:0,
-            z:value
-        }
-    }
-}
-function getRandomNumber() {
-    return Math.floor(Math.random() * 3) + 1; // Gera 1, 2 ou 3
+        return { x, y, z };
+    };
+
+    const { x: valueX, y: valueY, z: valueZ } = randomUnitVector();
+
+    // Ajusta para garantir a distância mínima
+    return {
+        x: valueX + (Math.random() < 0.5 ? -1 : 1) * minDistance,
+        y: valueY + (Math.random() < 0.5 ? -1 : 1) * minDistance,
+        z: valueZ + (Math.random() < 0.5 ? -1 : 1) * minDistance,
+    };
 }
