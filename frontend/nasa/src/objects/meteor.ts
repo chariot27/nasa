@@ -2,7 +2,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import * as THREE from "three"
 import { getFresnelMat } from '../utils/getFresnelMat';
 function RandomSize() {
-  const randomNum = Math.random() * (0.07 - 0.02) + 0.02;
+  const randomNum = Math.random() * (0.014 - 0.007) + 0.007;
   return randomNum
 }
 const geometry = new THREE.IcosahedronGeometry(1, 12);
@@ -37,7 +37,6 @@ function Meteor() {
 
   const meteorGlow = MeteorGlow()
   meteorGroup.add(meteorGlow)
-  console.log(meteorGroup)
   return meteorGroup
 }
 

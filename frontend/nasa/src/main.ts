@@ -183,19 +183,21 @@ let COMMETS
   if (COMMETS.length == 0) {
     console.log("nao foi encontrado nenhum cometa")
   } else {
-    createMenu(COMMETS);
     for (let i = 0; i < COMMETS.comets.length; i++) {
       const comet_coordinate = getRandomCoordinate(COMMETS.comets[i].moid_au)
-      console.log(comet_coordinate)
 
       let meteor = Meteor()
       meteor.position.set(comet_coordinate.x, comet_coordinate.y, comet_coordinate.z)
       scene.add(meteor)
 
+      COMMETS.comets[i].meteor = meteor
+
 
       // TRABALHA AQUI HENRY AAAAAAAAAAAAAAAAAAAAAAAAA
       //FELIZ ANIVERSARIO
     }
+
+    createMenu(COMMETS);
   }
   animate();
 })();
