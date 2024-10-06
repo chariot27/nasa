@@ -11,10 +11,9 @@ import Moon from "./objects/moon";
 import Mercury from "./objects/mercury";
 import Jupiter from "./objects/jupiter";
 import getRandomCoordinate from "./utils/getRandomCoordinate";
-import Neptune from "./objects/neptune";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import Meteor from "./objects/meteor";
-
+import Neptune from "./objects/neptune";
 
 // Global declaration
 let scene;
@@ -74,36 +73,28 @@ sun.scale.set(13.29, 13.29, 13.29); // Alterado conforme sua versão
 scene.add(sun);
 
 // add earth
-let earthMesh = EarthMesh();
-let lightsMesh = LightsMesh();
-let cloudsMesh = CloudsMesh();
-const earth = Earth(earthMesh, lightsMesh, cloudsMesh);
-scene.add(earth);
+let earthMesh = EarthMesh()
+let lightsMesh = LightsMesh()
+let cloudsMesh = CloudsMesh()
+const earth = Earth(earthMesh, lightsMesh, cloudsMesh)
+scene.add(earth)
 
 // add moon
-let moon = Moon();
-moon.position.set(5, 0, 0);
-moon.scale.set(0.272, 0.272, 0.272);
-scene.add(moon);
+let moon = Moon()
+moon.position.set(5, 0, 0)
+moon.scale.set(0.272, 0.272, 0.272)
+scene.add(moon)
 
-// add mercury
-let mercury = Mercury();
-mercury.position.set(7, 0, 0);
-mercury.scale.set(0.382, 0.382, 0.382); // Alterado conforme sua versão
-scene.add(mercury);
+let mercury = Mercury()
+mercury.position.set(7, 0, 0)
+scene.add(mercury)
 
-// add jupiter
-let jupiter = Jupiter();
-jupiter.position.set(19, 0, 0);
-jupiter.scale.set(10.97, 10.97, 10.97); // Alterado conforme sua versão
-scene.add(jupiter);
-
-// add neptune
-let neptune = Neptune();
-neptune.position.set(36, 0, 0); // Adicionado na sua versão
-neptune.scale.set(3.86, 3.86, 3.86); // Adicionado na sua versão
-scene.add(neptune);
-
+let jupiter = Jupiter()
+jupiter.position.set(19, 0, 0)
+scene.add(jupiter)
+let neptune = Neptune()
+neptune.position.set(23, 0, 0)
+scene.add(neptune)
 /*
 const loader = new GLTFLoader().setPath('./models/meteorite/');
 loader.load('scene.gltf', (gltf) => {
@@ -162,7 +153,7 @@ let COMMETS
 (async () => {
   COMMETS = await getData()
   if (COMMETS.length == 0) {
-    console.log("nao foi encontrado nenhum cometa");
+    console.log("nao foi encontrado nenhum cometa")
   } else {
     createMenu(COMMETS);
     for (let i = 0; i < COMMETS.comets.length; i++) {
