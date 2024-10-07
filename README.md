@@ -5,7 +5,7 @@
 - Django
 - Django REST Framework
 - Django Cors Headers
-- 
+
 ## Getting Started
 
 -- start the api
